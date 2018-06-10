@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package test;
 
 import estructuras.Nodo;
+import estructuras.cola.Cola;
+import estructuras.pila.Pila;
 import modelos.Moto;
 import modelos.Auto;
 import java.util.Scanner;
@@ -13,15 +10,9 @@ import test.*;
 import excepciones.Eleccion;
 import excepciones.EleccionException;
 
-/**
- *
- * @author ncalumno01
- */
+
 public class Test {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
 		Scanner sc = new Scanner(System.in);
@@ -44,11 +35,17 @@ public class Test {
 		
 		Auto [] automovil = new Auto [10];
 		Moto [] motocicleta = new Moto [10];
+		
 		Nodo auto = new Nodo();
+		Nodo moto = new Nodo();
+		Cola colaReparacion = new Cola();
+		Pila repararMotor = new Pila();
+		
 		
 		System.out.println("Bienvenido");	
 		do{
 			System.out.println("1.Operar");
+			System.out.println("2.Taller");
             System.out.println("2.Salir");
             opcionIngresada=sc.nextInt();
             sc.nextLine();
@@ -67,7 +64,7 @@ public class Test {
             switch (opcionIngresada) {
 				case 1:
 					do{
-						System.out.println("Ha seleccionado Operar");
+						System.out.println("\nHa seleccionado Operar");
 						System.out.println("1.Registrar auto");
 						System.out.println("2.Registrar moto");
 						System.out.println("3.Borrar auto registrado");
@@ -86,7 +83,7 @@ public class Test {
 							String airbags = sc.nextLine();
 							System.out.println("Ingrese los datos del motor");
 							System.out.println("De cuantos capacidades en litros es?");
-							motorLitros = (float)sc.nextInt();
+							motorLitros = (float)sc.nextFloat();
 							System.out.println("De cuantas cilindradas es?");
 							motorCilindradas = sc.nextInt();
 							
@@ -105,7 +102,7 @@ public class Test {
 							String encendidoElectronico = sc.nextLine();
 							System.out.println("Ingrese los datos del motor");
 							System.out.println("De cuantos capacidades en litros es?");
-							motorLitros = (float)sc.nextInt();
+							motorLitros = (float)sc.nextFloat();
 							System.out.println("De cuantas cilindradas es?");
 							motorCilindradas = sc.nextInt();
 							
@@ -175,8 +172,83 @@ public class Test {
 						}
 					}while (opcionIngresada != 0);
 					break;
+					
 				case 2:
-					System.out.println("Ha seleccionado terminar");
+					
+					do{
+						System.out.println("\nHa ingresado al taller");
+						System.out.println("1.Ingresar nuevo auto a la cola de reparacion");
+						System.out.println("2.Ver la cola de reparacion");
+						System.out.println("3.Comenzar la reparacion");
+						System.out.println("0.Volver");
+						opcionIngresada=sc.nextInt();
+			            sc.nextLine();
+			            
+			            switch (opcionIngresada){
+			            case 1:
+			            	do{
+			            		System.out.println("1.Ingresar auto a la cola");
+				            	System.out.println("2.Ingresar moto a la cola");
+				            	System.out.println("0.Volver");
+				            	opcionIngresada=sc.nextInt();
+					            sc.nextLine();
+				            	switch ( opcionIngresada){
+				            	case 1:
+				            		
+				            		System.out.println("Procedemos a mostrar la lista de registrados");
+									for (i=0; (automovil[i]!= null) ; i++){
+										System.out.println(i+" Vin: "+automovil[i].getVin()+" de motor "+automovil[i].getMotorLitros()+" litros, "+automovil[i].getMotorCilindradas()+" cilindradas y "+automovil[i].getContenido()+" posee airbag\n" );
+									}
+									System.out.println("Seleccione el numero del auto para agregar a la cola");
+									numeroSeleccionado=sc.nextInt();								
+									for (i=0; i<automovil.length; i++){
+								        if (i == numeroSeleccionado){
+								        	auto.dato=automovil[i];
+								        	colaReparacion.enqueue(auto.dato);
+								        }  
+								        }
+									break;
+				            	case 2:
+				            		
+				            		System.out.println("Procedemos a mostrar la lista de registrados");
+									for (i=0; (motocicleta[i]!= null) ; i++){
+										System.out.println(i+" Vin: "+motocicleta[i].getVin()+" de motor "+motocicleta[i].getMotorLitros()+" litros, "+motocicleta[i].getMotorCilindradas()+" cilindradas y "+motocicleta[i].getContenido()+" posee encendido electronico\n" );
+									}
+									System.out.println("Seleccione el numero de la moto para agregar a la cola");
+									numeroSeleccionado=sc.nextInt();
+									for (i=0; i<motocicleta.length; i++)
+								        if (i == numeroSeleccionado){
+								        	auto.dato=motocicleta[i];
+								        	colaReparacion.enqueue(auto.dato);
+								        }  
+									break;
+								        }
+			            	}while (opcionIngresada != 0);
+			            case 2:
+			            	System.out.println("Procedemos a mostrar la cola");
+			            	
+			            	colaReparacion.print();
+			            	
+			            	break;
+			            case 3:
+	 	
+			            	break;
+			            case 4:
+	 	
+			            	break;
+			            case 5:
+	 	
+			            	break;
+	 	
+			            	
+			            }
+			            
+						break;
+					}while(opcionIngresada != 0);
+					
+					
+				case 3:
+					System.out.println("\nHa seleccionado terminar");
 					break;
 				default:
 					break;
@@ -186,4 +258,5 @@ public class Test {
 	}
     }
     
+
 
