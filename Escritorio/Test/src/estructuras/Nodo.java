@@ -7,17 +7,16 @@ public class Nodo {
     
     public Nodo siguiente;
     
-    public Nodo (Object objectToPush, Nodo n){
-        dato = objectToPush;
+    public Nodo (Object o, Nodo n){
+        dato = o;
         siguiente = n;
        
         
     }
-
-    Nodo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Nodo(){
+    	
     }
-    
-    
+
     
 }
