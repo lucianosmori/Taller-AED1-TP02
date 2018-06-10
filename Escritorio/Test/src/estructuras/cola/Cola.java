@@ -1,44 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package estructuras.cola;
 
-/**
- *
- * @author ncalumno01
- */
-public class Cola {
-    
-    class Nodo{
-        char simbolo;
-        Nodo siguiente;
-        
-    }
-    
-    private Nodo raiz;
-    
+import excepciones.EmptyQueueException;
+import estructuras.Nodo;
+
+public class Cola implements QueueActions{
+	
+	
+	Nodo first;
+	Nodo fin;
+    int size;
+   
     public Cola(){
-        raiz=null;
+        first=fin=null;
+        size = 0;
+    }   
+public boolean isEmpty(){
+     return first == null;
     }
-    
-        public boolean isEmpty(){
+
+public void reset(){
             
         }
-
-	void reset(){
+public void enqueue(Object o){
+            Nodo nuevo=new Nodo(o,null);
+            if(isEmpty()){
+            	first = nuevo;
+            	}else{
+            		fin.siguiente=nuevo;
+            }
+            fin=nuevo;
+            size++;
+            }
             
-        }
-
-	void enqueue(Object o){
-            
-        }
-
-	Object first() throws EmptyQueueException;
-
-	Object dequeue() throws EmptyQueueException;
-    
-    
-    
+public Object first() throws EmptyQueueException{
+	if (isEmpty()){
+		throw new EmptyQueueException();
+	}else{
+		return first;
+	}
+	
 }
+
+public Object dequeue() throws EmptyQueueException{
+	if (isEmpty()){
+		throw new EmptyQueueException();
+	}else{
+		 Object o = first.dato;
+		    first = first.siguiente;
+		    size--;
+		    return o;
+	}
+}
+
+public void print(){
+	Nodo aux = new Nodo();
+	aux= first;
+	if(isEmpty())
+        System.out.println("La cola esta vacia!");
+    else {
+    	while(aux != null){
+    		System.out.println("　" + aux.dato);
+    		aux = aux.siguiente;
+    	}
+        }
+    }
+}  
